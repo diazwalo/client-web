@@ -44,7 +44,7 @@
 
 ### 2. Lancement du serveur web
 
-**Le client web dispose de son propre serveur HTTP. Son rôle est simple : servir tous les éléments statiques de l'application (le ou les fichiers html, css, js, images, etc.).**
+**Le client web dispose de son propre serveur HTTP. Son rôle est simple : servir tous les éléments statiques de l'application (les fichiers html, css, js, images, etc.).**
 
 Ce serveur web doit donc être lancé **en parallèle** du serveur REST (*qui lui doit en principe être déjà lancé sur le port `8080`*) :
 
