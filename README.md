@@ -1,5 +1,5 @@
 #### Projet agile <!-- omit in toc -->
-# Client JS <!-- omit in toc -->
+# Client Web <!-- omit in toc -->
 
 ***Ce repo contient le code du front web du projet agile.***
 
@@ -19,13 +19,13 @@
 1. Fork + clone du repo
 2. Dans un terminal :
 	```bash
-	cd client-js
+	cd client-web
 	npm install
 	npm start
 	```
 3. Dans un 2e terminal :
 	```bash
-	cd client-js
+	cd client-web
 	npm run watch
 	```
 
@@ -50,17 +50,17 @@ Ce serveur web doit donc être lancé **en parallèle** du serveur REST (*qui lu
 
 1. **Lancez notre serveur web statique** en tapant :
 	```bash
-	cd client-js
+	cd client-web
 	npm start
 	```
 
-	<img alt="" width="480" src="https://gitlab.com/univlille/defi-agile-iut/skeleton/client-js/uploads/7582c3ae30463f2888942e7e4bf300e4/npm-start.gif" />
+	<img alt="" width="480" src="https://gitlab.com/univlille/defi-agile-iut/skeleton/client-web/uploads/7582c3ae30463f2888942e7e4bf300e4/npm-start.gif" />
 
 	***NB :** vous aurez bien entendu remarqué que la commande est différente de ce que vous aviez fait jusque là en TP de JS. Pour plus d'explications voir dans la FAQ : [Où est passée la commande `npx serve -l 8000` ? et c'est quoi ce `npm start` ?](#où-est-passée-la-commande-npx-serve--l-8000--et-cest-quoi-ce-npm-start-)*
 
 2. **Vérifiez que la page `public/index.html` s'affiche bien dans votre navigateur** en ouvrant l'adresse http://localhost:8000/. Le résultat attendu est le suivant :
 
-	<img alt="" src="https://gitlab.com/univlille/defi-agile-iut/skeleton/client-js/uploads/8960ccf488eeae4ec3196a2138f89fbe/localhost-sans-js.png" >
+	<img alt="" src="https://gitlab.com/univlille/defi-agile-iut/skeleton/client-web/uploads/8960ccf488eeae4ec3196a2138f89fbe/localhost-sans-js.png" >
 
 ### 3. Compilation du JS
 
@@ -71,11 +71,11 @@ Ce serveur web doit donc être lancé **en parallèle** du serveur REST (*qui lu
 	npm run watch
 	```
 
-	<img alt="" src="https://gitlab.com/univlille/defi-agile-iut/skeleton/client-js/uploads/efb0c488306150dcced82dbe4ac8b759/npm-run-watch.gif" width="480" >
+	<img alt="" src="https://gitlab.com/univlille/defi-agile-iut/skeleton/client-web/uploads/efb0c488306150dcced82dbe4ac8b759/npm-run-watch.gif" width="480" >
 
 2. **Vérifiez que la page `public/index.html` affiche maintenant le texte retourné par le serveur REST** : rechargez http://localhost:8000/. Le résultat attendu est le suivant :
 
-	<img alt="" src="https://gitlab.com/univlille/defi-agile-iut/skeleton/client-js/uploads/f747f3a7ba2d4f3c01dd941b0041aaa1/localhost-avec-js.gif" >
+	<img alt="" src="https://gitlab.com/univlille/defi-agile-iut/skeleton/client-web/uploads/f747f3a7ba2d4f3c01dd941b0041aaa1/localhost-avec-js.gif" >
 
 **Voilà, vous êtes maintenant prêt à coder !**
 
