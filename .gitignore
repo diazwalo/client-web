@@ -6,3 +6,6 @@ build
 # Vim
 *~
 *.swp
+
+# generated files
+coverage
