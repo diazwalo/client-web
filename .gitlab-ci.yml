@@ -16,7 +16,7 @@ cache:
     - npm run test
     - cat target/site/jacoco/index.html
 
-.test:
+test:
   stage: 🔍 test
   image: node
   script:
