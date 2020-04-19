@@ -1,3 +1,5 @@
+const base_url = require('./url');
+
 const appContainer = document.querySelector('#appContainer'),
 	hostname = window.location.hostname,
 	protocol = window.location.protocol;
