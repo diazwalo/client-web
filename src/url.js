@@ -1,6 +1,6 @@
-function base_url(protocol, hostname, port) {
-    const default_port = 8080
-    return port === "" ? `${protocol}//${hostname}` : `${protocol}//${hostname}:${default_port}`
-}
+export default function getApiUrl({ protocol, hostname, port }) {
+	const isProd = port === '',
+		apiPort = isProd ? '' : ':8080';
 
-module.exports = base_url;
+	return `${protocol}//${hostname}${apiPort}`;
+}

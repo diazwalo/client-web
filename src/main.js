@@ -1,12 +1,8 @@
-const base_url = require('./url');
+import getApiUrl from './url';
 
 const appContainer = document.querySelector('#appContainer'),
-	hostname = window.location.hostname,
-	protocol = window.location.protocol;
-	port = window.location.port;
+	apiUrl = getApiUrl(window.location);
 
-
-fetch(base_url(protocol, hostname, port) + '/api/v1/myresource')
+fetch(apiUrl + '/api/v1/myresource')
 	.then(response => response.text())
 	.then(message => (appContainer.innerHTML = message));
-
