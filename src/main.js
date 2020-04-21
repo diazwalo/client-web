@@ -1,7 +1,8 @@
 import getApiUrl from './utils/url';
 
 const appContainer = document.querySelector('#appContainer'),
-	apiUrl = getApiUrl(window.location);
+    const {protocol, hostname, port} = window.location;
+	apiUrl = getApiUrl(protocol, hostname, port);
 
 fetch(apiUrl + '/api/v1/myresource')
 	.then(response => response.text())

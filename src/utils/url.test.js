@@ -1,4 +1,4 @@
-const base_url = require('./url');
+import base_url from './url';
 
 describe('base_url', () => {
     test('should include default port when is define', () => {
@@ -8,3 +8,4 @@ describe('base_url', () => {
         expect(base_url('https:','server','')).toBe('https://server');
     });
 });
+
