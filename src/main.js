@@ -1,4 +1,4 @@
-import getApiUrl from './url';
+import getApiUrl from './utils/url';
 
 const appContainer = document.querySelector('#appContainer'),
 	apiUrl = getApiUrl(window.location);
