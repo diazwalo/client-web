@@ -93,11 +93,12 @@ Pour mémoire la commande que l'on utilisait dans les TPs pour lancer le serveur
 
 En réalité si vous inspectez le fichier `package.json` vous verrez que l'on retrouve bien cette commande dans la clé `"scripts"` :
 ```json
-"start": "serve public -l 8000"
+"start": "serve public -l tcp://0.0.0.0:8000"
 ```
 Les seules différences avec ce qui était fait en TP sont :
 - on n'utilise plus `npx`. A la place, le paquet [serve](https://www.npmjs.com/package/serve) est installé directement dans le projet (*cf. la clé `"dependencies"` du `package.json`*). [serve](https://www.npmjs.com/package/serve) n'est donc pas re-téléchargé à chaque fois (comme c'était le cas avec `npx`), ce qui permet d'accélérer sensiblement le lancement du serveur)
 - on passe un paramètre supplémentaire à `serve` qui est le dossier dans lequel on veut lancer le serveur : il s'agit du dossier `public` (c'est celui qui contient la page HTML et tous les assets)
+- pour écouter les connexions entrantes sur tous les noms de domaines (et pas que "localhost"), on passe `tcp://0.0.0.0:8000` et plus uniquement le numéro de port.
 
 ### Ma question n'est pas là ?
 Envoyez votre question sur discord dans le channel `#help` !
