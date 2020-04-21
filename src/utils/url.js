@@ -1,4 +1,4 @@
-export default function getApiUrl( protocol, hostname, port ) {
+export default function getApiUrl({ protocol, hostname, port }) {
 	const isProd = port === '',
 		apiPort = isProd ? '' : ':8080';
 
