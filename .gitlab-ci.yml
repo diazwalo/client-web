@@ -1,5 +1,6 @@
 stages:
   - 🔍 test
+  - 🌡️ quality
   - 📦 build
   - 🐋 deploy
 
@@ -19,7 +20,7 @@ test:
       junit: test-report.xml
 
 sonar:
-  stage: 🔍 test
+  stage: 🌡️ quality
   image: registry.gitlab.com/azae/docker/sonar
   script:
     - export SONAR_HOST_URL=https://sonar.tcweb.org
