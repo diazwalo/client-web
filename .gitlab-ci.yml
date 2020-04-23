@@ -18,6 +18,13 @@ test:
     reports:
       junit: test-report.xml
 
+sonar:
+  stage: 🔍 test
+  image: registry.gitlab.com/azae/docker/sonar
+  script:
+    - export SONAR_HOST_URL=https://sonar.tcweb.org
+    - sonar-scanner -Dsonar.projectKey=fr.ulille.iut.agile.skeleton:client-web
+
 build:
   stage: 📦 build
   image: docker:latest
