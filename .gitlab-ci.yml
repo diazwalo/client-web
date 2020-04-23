@@ -14,6 +14,9 @@ test:
     - npm install
     - npm run test -- --coverage
   coverage: /All\sfiles.*?\s+(\d+.\d+)/
+  artifacts:
+    reports:
+      junit: test-report.xml
 
 build:
   stage: 📦 build
