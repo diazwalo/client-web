@@ -13,9 +13,10 @@ test:
   image: node
   script:
     - npm install
-    - npm run test -- --ci --reporters=default --reporters=jest-junit --reporters=jest-sonar --coverage
+    - npm run test -- --ci --reporters=default --reporters=jest-junit --coverage
   coverage: /All\sfiles.*?\s+(\d+.\d+)/
   artifacts:
+    untracked: true
     reports:
       junit: junit.xml
 
@@ -24,7 +25,7 @@ sonar:
   image: registry.gitlab.com/azae/docker/sonar
   script:
     - export SONAR_HOST_URL=https://sonar.tcweb.org
-    - sonar-scanner -Dsonar.sources=src -Dsonar.coverageReportPaths=sonar-report.xml -Dsonar.projectKey=fr.ulille.iut.agile.skeleton:client-web
+    - sonar-scanner -Dsonar.sources=src -Dsonar.coverageReportPaths=junit.xml -Dsonar.projectKey=fr.ulille.iut.agile.skeleton:client-web
   dependencies:
     - test
 
