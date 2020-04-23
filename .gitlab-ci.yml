@@ -25,7 +25,7 @@ sonar:
   image: registry.gitlab.com/azae/docker/sonar
   script:
     - export SONAR_HOST_URL=https://sonar.tcweb.org
-    - sonar-scanner -Dsonar.sources=src -Dsonar.testExecutionReportPaths=sonar-report.xml -Dsonar.projectKey=fr.ulille.iut.agile.skeleton:client-web
+    - sonar-scanner -Dsonar.projectKey=fr.ulille.iut.agile.skeleton:client-web
   dependencies:
     - test
 
