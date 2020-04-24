@@ -24,7 +24,6 @@ sonar:
   stage: 🌡️ quality
   image: registry.gitlab.com/azae/docker/sonar
   script:
-    - export SONAR_HOST_URL=https://sonar.tcweb.org
     - sonar-scanner -Dsonar.projectKey=fr.ulille.iut.agile.skeleton:client-web
   dependencies:
     - test
