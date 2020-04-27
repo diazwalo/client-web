@@ -1,5 +1,5 @@
 {
-  "name": "myproject",
+  "name": "greenwater",
   "version": "1.0.0",
   "description": "défi agile 2020",
   "main": "index.js",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@gitlab.com:univlille/defi-agile-iut/skeleton/client-js.git"
+    "url": "git@gitlab.com:univlille/defi-agile-iut/groupe-4/client-js.git"
   },
   "author": "",
   "license": "ISC",
