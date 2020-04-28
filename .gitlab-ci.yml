@@ -24,7 +24,7 @@ sonar:
   stage: 🌡️ quality
   image: registry.gitlab.com/azae/docker/sonar
   script:
-    - sonar-scanner -Dsonar.projectKey=fr.ulille.iut.agile.skeleton:client-web
+    - sonar-scanner -Dsonar.projectKey=fr.ulille.iut.agile.groupe-4:client-web
   dependencies:
     - test
 
@@ -44,4 +44,3 @@ deploy:
     - curl -X POST -data=""  https://deliverous.com/api/v1/trigger/$DELIVEROUS_TRIGGER
   only:
     - master
-
