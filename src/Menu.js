@@ -5,26 +5,29 @@ import Connection from './pages/Connection';
 export default class Menu extends Component {
 	constructor() {
 		super('nav', {
-			class:
-				'flex flex-row space-between p-2 pt-4 pb-4 mb-4 bg-gray-200 shadow-md',
+			class: 'flex flex-row space-between mb-4 bg-gray-200 shadow-md',
 		});
 		const newContent = [
 			// Left part
-			new Component('div', { class: 'w-1/4 flex flex-row space-between' }, [
-				new Component(
-					'h1',
-					{
-						class: 'text-teal-500 text-2xl hover:text-teal-800 cursor-pointer',
-					},
-					new Component('a', { id: 'titleButton' }, 'Greenwater')
-				),
-			]),
+			new Component(
+				'div',
+				{ class: 'w-1/4 flex flex-row space-between pl-2' },
+				[
+					new Component('img', [
+						{ src: 'images/Logo_green_Water.png' },
+						{ alt: 'title-logo-GreenWater' },
+						{ id: 'titleButton' },
+						{ class: 'h-16 cursor-pointer' },
+					]),
+				]
+			),
 
 			// Right part
 			new Component(
 				'div',
 				{
-					class: 'w-3/4 flex flex-row-reverse space-around items-stretch',
+					class:
+						'w-3/4 flex flex-row-reverse space-around items-stretch mt-4 mb-4 pr-2',
 				},
 				[
 					new Component(
