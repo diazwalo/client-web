@@ -5,32 +5,35 @@ export default class Component {
 	#type; // string
 	#attributes; // List of {key: value}
 	#content; // string | component | [component]
-	#autoclose; // bool
 
 	/**
 	 * Constructeur d'un Component.
 	 * @param {string} type
 	 * @param {List of {key, value}} attributes
 	 * @param {string | Component | List of Component} content
-	 * @param {bool} autoclose
 	 */
-	constructor(type, attributes, content, autoclose) {
+	constructor(type, attributes, content) {
 		this.#type = type;
 		this.#attributes = attributes;
 		this.#content = content;
-		this.#autoclose = autoclose;
+	}
+
+	setContent(content) {
+		this.#content = content;
 	}
 
 	/**
 	 * Rendu d'un composant du site web.
 	 */
 	render() {
-		let attributes = this.renderAttributes();
-		if (this.#autoclose) {
-			return `<${this.#type} ${this.renderAttributes()}/>`;
+		const attributes = this.renderAttributes();
+		if (!this.#content) {
+			return `<${this.#type}${
+				attributes.length !== 0 ? ' ' + attributes : ''
+			}/>`;
 		} else {
 			return `<${this.#type}${
-				attributes.length > 0 ? ' ' + attributes : ''
+				attributes.length !== 0 ? ' ' + attributes : ''
 			}>${this.renderContent()}</${this.#type}>`;
 		}
 	}
@@ -42,6 +45,8 @@ export default class Component {
 			return content.render();
 		} else if (content instanceof Array) {
 			return content.map(e => this.subrenderContent(e)).join('');
+		} else if (!content) {
+			return '';
 		}
 	}
 
@@ -50,7 +55,7 @@ export default class Component {
 	}
 
 	renderAttributes() {
-		if (this.#attributes === null) {
+		if (!this.#attributes) {
 			return '';
 		} else {
 			if (Array.isArray(this.#attributes)) {
