@@ -1,9 +1,13 @@
 import getApiUrl from './utils/url';
-import Component from './rendering/Component';
+import Menu from './rendering/Menu';
+import MenuButton from './rendering/MenuButton';
+import Index from './pages/Index';
+import { mainPageRenderer } from './pages/PageRenderer';
+import { isUserConnected } from './utils/cookies';
 
 const appContainer = document.querySelector('#appContainer'),
 	apiUrl = getApiUrl(window.location);
-
+/*
 fetch(apiUrl + '/api/v1/helloworld')
 	.then(response => response.text())
 	.then(message => {
@@ -26,3 +30,14 @@ fetch(apiUrl + '/api/v1/helloworld')
 		);
 		appContainer.innerHTML = errorMessage.render();
 	});
+*/
+
+const menu = new Menu();
+const index = new Index();
+
+mainPageRenderer.setTarget('#appContainer');
+mainPageRenderer.setMenu(menu);
+
+menu.setEvents();
+
+mainPageRenderer.setPage(index);
