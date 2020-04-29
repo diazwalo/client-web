@@ -73,6 +73,7 @@ class PageRenderer {
 	setMenu(menu) {
 		this.#menu = menu;
 		document.querySelector('#menu').innerHTML = this.#menu.render();
+		this.#menu.setEvents();
 	}
 
 	/**

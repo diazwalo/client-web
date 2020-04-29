@@ -1,7 +1,7 @@
 import Component from './Component';
 import Index from '../pages/Index';
 import Connection from '../pages/Connection';
-import { getCookies, isUserConnected } from '../utils/cookies';
+import { isUserConnected } from '../utils/cookies';
 import { mainPageRenderer } from '../pages/PageRenderer';
 import MenuButton from './MenuButton';
 
@@ -86,7 +86,8 @@ export default class Menu extends Component {
 		if (disconnectButton)
 			disconnectButton.onclick = e => {
 				document.cookie = 'uuid=disconnected';
-				alert('Déconnecté');
+				mainPageRenderer.setMenu(new Menu());
+				mainPageRenderer.setPage(new Index());
 			};
 	}
 }
