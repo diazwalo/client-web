@@ -1,4 +1,3 @@
-import getApiUrl from './utils/url';
 import Menu from './rendering/Menu';
 import Index from './pages/Index';
 import { mainPageRenderer } from './pages/PageRenderer';
