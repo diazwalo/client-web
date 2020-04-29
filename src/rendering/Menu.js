@@ -4,16 +4,18 @@ import Connection from '../pages/Connection';
 import { isUserConnected } from '../utils/cookies';
 import { mainPageRenderer } from '../pages/PageRenderer';
 import MenuButton from './MenuButton';
+import Inscription from '../pages/Inscription';
 
 const nonConnectedMenu = [
-	new MenuButton('indexButton', 'Accueil'),
-	new MenuButton('connectButton', 'Connexion'),
+	new MenuButton('indexMenuButton', 'Accueil'),
+	new MenuButton('connectMenuButton', 'Connexion'),
+	new MenuButton('registerMenuButton', 'Inscription'),
 ];
 
 // Menu of a connected user
 const connectedMenu = [
-	new MenuButton('indexButton', 'Accueil'),
-	new MenuButton('disconnectButton', 'Déconnexion'),
+	new MenuButton('indexMenuButton', 'Accueil'),
+	new MenuButton('disconnectMenuButton', 'Déconnexion'),
 ];
 
 const menuSkeleton = menu => [
@@ -22,7 +24,7 @@ const menuSkeleton = menu => [
 		new Component('img', [
 			{ src: 'images/Logo_green_Water.png' },
 			{ alt: 'title-logo-GreenWater' },
-			{ id: 'titleButton' },
+			{ id: 'titleMenuButton' },
 			{ class: 'h-16 cursor-pointer' },
 		]),
 	]),
@@ -66,17 +68,18 @@ export default class Menu extends Component {
 	 */
 	setEvents() {
 		// Quand don clique sur le logo du site ou sur "Accueil"
-		document.querySelector('#titleButton').onclick = e => {
+		document.querySelector('#titleMenuButton').onclick = e => {
 			mainPageRenderer.setPage(new Index());
 		};
 
-		document.querySelector('#indexButton').onclick = e => {
+		document.querySelector('#indexMenuButton').onclick = e => {
 			mainPageRenderer.setPage(new Index());
 		};
 
 		// Bouton de connexion et déconnexion
-		const connectButton = document.querySelector('#connectButton'),
-			disconnectButton = document.querySelector('#disconnectButton');
+		const connectButton = document.querySelector('#connectMenuButton'),
+			disconnectButton = document.querySelector('#disconnectMenuButton'),
+			registerMenuButton = document.querySelector('#registerMenuButton');
 
 		if (connectButton)
 			connectButton.onclick = e => {
@@ -85,9 +88,15 @@ export default class Menu extends Component {
 
 		if (disconnectButton)
 			disconnectButton.onclick = e => {
-				document.cookie = 'uuid=disconnected';
+				document.cookie = 'uuid= ; expires = Thu, 01 Jan 1970 00:00:00 GMT';
 				mainPageRenderer.setMenu(new Menu());
 				mainPageRenderer.setPage(new Index());
+				mainPageRenderer.switchActive('#indexMenuButton');
+			};
+
+		if (registerMenuButton)
+			registerMenuButton.onclick = e => {
+				mainPageRenderer.setPage(new Inscription());
 			};
 	}
 }

@@ -92,6 +92,7 @@ export default class Connection extends Component {
 				.then(response => response.json())
 				.then(data => {
 					if (!data.authent) {
+						console.log(data);
 						this.showError('Mot de passe ou utilisateur incorrect.');
 					} else {
 						console.log(data);

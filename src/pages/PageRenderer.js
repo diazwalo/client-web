@@ -1,5 +1,6 @@
 import Index from './Index';
 import Connection from './Connection';
+import Inscription from './Inscription';
 
 class PageRenderer {
 	#target; // string
@@ -27,15 +28,19 @@ class PageRenderer {
 
 		if (this.#page instanceof Index) {
 			content = this.#page.render();
-			this.setActive('#indexButton');
-			this.unsetActive('#connectButton');
+			this.switchActive('#indexMenuButton');
 		} else if (this.#page instanceof Connection) {
 			content = this.#page.render();
 			postRenderOperation = () => {
 				this.#page.setEvents();
 			};
-			this.unsetActive('#indexButton');
-			this.setActive('#connectButton');
+			this.switchActive('#connectMenuButton');
+		} else if (this.#page instanceof Inscription) {
+			content = this.#page.render();
+			this.switchActive('#registerMenuButton');
+			postRenderOperation = () => {
+				this.#page.setEvents();
+			};
 		}
 
 		document.querySelector(this.#target).innerHTML = content;
@@ -64,6 +69,18 @@ class PageRenderer {
 			element.classList.remove('text-blue-500');
 			element.classList.add('text-gray-700');
 		}
+	}
+
+	/**
+	 * Set a menu button to active and disable all the others
+	 * @param {string} target
+	 */
+	switchActive(target) {
+		this.unsetActive('#indexMenuButton');
+		this.unsetActive('#connectMenuButton');
+		this.unsetActive('#disconnectMenuButton');
+		this.unsetActive('#registerMenuButton');
+		this.setActive(target);
 	}
 
 	/**
