@@ -1,5 +1,30 @@
 import Component from './Component.js';
 
+describe('component_constructor', () => {
+	test('full_constructor', () => {
+		const c = new Component('a', { class: 'test' }, 'content');
+		expect(c.type).toBe('a');
+		expect(c.attributes).toStrictEqual({ class: 'test' });
+		expect(c.content).toBe('content');
+	});
+
+	test('autoclose_component', () => {
+		const c = new Component('a');
+		expect(c.type).toBe('a');
+		expect(c.attributes).toStrictEqual(undefined);
+		expect(c.content).toStrictEqual(undefined);
+	});
+});
+
+describe('component_methods', () => {
+	test('set_content', () => {
+		const c = new Component('a', null, 'content');
+		expect(c.content).toBe('content');
+		c.setContent('hello world');
+		expect(c.content).toBe('hello world');
+	});
+});
+
 describe('component_rendering', () => {
 	test("rendu d'une balise auto fermante", () => {
 		const c = new Component('button');

@@ -2,9 +2,9 @@
  * Classe représentant un composant d'une page web.
  */
 export default class Component {
-	#type; // string
-	#attributes; // List of {key: value}
-	#content; // string | component | [component]
+	type; // string
+	attributes; // List of {key: value}
+	content; // string | component | [component]
 
 	/**
 	 * Constructeur d'un Component.
@@ -13,13 +13,13 @@ export default class Component {
 	 * @param {string | Component | List of Component} content
 	 */
 	constructor(type, attributes, content) {
-		this.#type = type;
-		this.#attributes = attributes;
-		this.#content = content;
+		this.type = type;
+		this.attributes = attributes;
+		this.content = content;
 	}
 
 	setContent(content) {
-		this.#content = content;
+		this.content = content;
 	}
 
 	/**
@@ -27,14 +27,14 @@ export default class Component {
 	 */
 	render() {
 		const attributes = this.renderAttributes();
-		if (!this.#content) {
-			return `<${this.#type}${
+		if (!this.content) {
+			return `<${this.type}${
 				attributes.length !== 0 ? ' ' + attributes : ''
 			}/>`;
 		} else {
-			return `<${this.#type}${
+			return `<${this.type}${
 				attributes.length !== 0 ? ' ' + attributes : ''
-			}>${this.renderContent()}</${this.#type}>`;
+			}>${this.renderContent()}</${this.type}>`;
 		}
 	}
 
@@ -51,16 +51,16 @@ export default class Component {
 	}
 
 	renderContent() {
-		return this.subrenderContent(this.#content);
+		return this.subrenderContent(this.content);
 	}
 
 	renderAttributes() {
-		if (!this.#attributes) {
+		if (!this.attributes) {
 			return '';
 		} else {
-			if (Array.isArray(this.#attributes)) {
+			if (Array.isArray(this.attributes)) {
 				let result = '';
-				result = this.#attributes
+				result = this.attributes
 					.map(object => {
 						const key = Object.keys(object)[0];
 						return `${key}="${object[key]}"`;
@@ -68,8 +68,8 @@ export default class Component {
 					.join(' ');
 				return result;
 			} else {
-				const key = Object.keys(this.#attributes)[0];
-				return `${key}="${this.#attributes[key]}"`;
+				const key = Object.keys(this.attributes)[0];
+				return `${key}="${this.attributes[key]}"`;
 			}
 		}
 	}

@@ -1,13 +1,12 @@
 import getApiUrl from './utils/url';
 import Menu from './rendering/Menu';
-import MenuButton from './rendering/MenuButton';
 import Index from './pages/Index';
 import { mainPageRenderer } from './pages/PageRenderer';
-import { isUserConnected } from './utils/cookies';
 
+/*
 const appContainer = document.querySelector('#appContainer'),
 	apiUrl = getApiUrl(window.location);
-/*
+
 fetch(apiUrl + '/api/v1/helloworld')
 	.then(response => response.text())
 	.then(message => {
