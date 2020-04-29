@@ -100,11 +100,10 @@ export default class Connection extends Component {
 						window.location.href = '/';
 					}
 				})
-				.catch(error => this.showError('Connexion impossible.'));
+				.catch(error => this.showError('Connexion impossible.<br>' + error));
 		};
 
-		document.querySelector('#startConnectButton').onclick = () =>
-			sendDatas(username, password);
+		document.querySelector('#startConnectButton').onclick = () => sendDatas();
 	}
 
 	/**
