@@ -23,6 +23,11 @@ export default class Connection extends Component {
 				],
 				errorComponent
 			),
+			new Component('img', [
+				{ src: 'images/Logo_green_Water.png' },
+				{ alt: 'greenwater-logo' },
+				{ class: 'm-auto w-32 h-16' },
+			]),
 			new Component(
 				'h2',
 				{ class: 'text-teal-500 mb-6 text-xl text-center' },
