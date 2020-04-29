@@ -35,19 +35,19 @@ export default class Index extends Component {
 						'Hello World !',
 						`At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium 
                 voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati`,
-						'https://i.picsum.photos/id/1002/512/512.jpg'
+						'images/wall.jpg'
 					),
 					new Card(
 						'Hello World !',
 						`At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium 
                 voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati`,
-						'https://i.picsum.photos/id/1002/512/512.jpg'
+						'images/paris.jpg'
 					),
 					new Card(
 						'Hello World !',
 						`At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium 
                 voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati`,
-						'https://i.picsum.photos/id/1002/512/512.jpg'
+						'images/vine-leaves.jpg'
 					),
 				]
 			),
