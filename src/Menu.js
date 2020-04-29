@@ -1,13 +1,37 @@
 import Component from './rendering/Component';
 import Index from './pages/Index';
 import Connection from './pages/Connection';
+import { getCookies, isUserConnected } from './utils/cookies';
+import { mainPageRenderer } from './pages/PageRenderer';
+import MenuButton from './rendering/MenuButton';
+
+// Menu of a non connected user
+const nonConnectedMenu = [
+	new MenuButton('indexButton', 'Accueil'),
+	new MenuButton('connectButton', 'Connexion'),
+];
+
+// Menu of a connected user
+const connectedMenu = [
+	new MenuButton('indexButton', 'Accueil'),
+	new MenuButton('disconnectButton', 'Déconnexion'),
+];
 
 export default class Menu extends Component {
 	constructor() {
 		super('nav', {
 			class: 'flex flex-row space-between mb-4 bg-gray-200 shadow-md',
 		});
-		const newContent = [
+
+		// Détection de la connexion ou non de l'utilisateur
+		let submenu = nonConnectedMenu;
+		if (isUserConnected() === true) {
+			console.warn('Connected');
+			submenu = connectedMenu;
+		}
+
+		// Structure du menu
+		const menu = [
 			// Left part
 			new Component(
 				'div',
@@ -29,34 +53,39 @@ export default class Menu extends Component {
 					class:
 						'w-3/4 flex flex-row-reverse space-around items-stretch mt-4 mb-4 pr-2',
 				},
-				[
-					new Component(
-						'a',
-						[{ id: 'connectButton' }, { class: 'cursor-pointer text-xl' }],
-						'Connexion'
-					),
-					new Component(
-						'a',
-						[{ id: 'indexButton' }, { class: 'mr-4 cursor-pointer text-xl' }],
-						'Accueil'
-					),
-				]
+				submenu
 			),
 		];
-		this.setContent(newContent);
+
+		this.setContent(menu);
 	}
 
-	setEvents(pageRenderer) {
+	/**
+	 * Bind des événements du menu
+	 */
+	setEvents() {
+		// Quand don clique sur le logo du site ou sur "Accueil"
 		document.querySelector('#titleButton').onclick = e => {
-			pageRenderer.setPage(new Index());
+			mainPageRenderer.setPage(new Index());
 		};
 
 		document.querySelector('#indexButton').onclick = e => {
-			pageRenderer.setPage(new Index());
+			mainPageRenderer.setPage(new Index());
 		};
 
-		document.querySelector('#connectButton').onclick = e => {
-			pageRenderer.setPage(new Connection());
-		};
+		// Bouton de connexion et déconnexion
+		const connectButton = document.querySelector('#connectButton'),
+			disconnectButton = document.querySelector('#disconnectButton');
+
+		if (connectButton)
+			connectButton.onclick = e => {
+				mainPageRenderer.setPage(new Connection());
+			};
+
+		if (disconnectButton)
+			disconnectButton.onclick = e => {
+				document.cookie = 'uuid=disconnected';
+				alert('Déconnecté');
+			};
 	}
 }

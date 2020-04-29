@@ -1,7 +1,11 @@
 import getApiUrl from './utils/url';
 import Menu from './Menu';
 import Index from './pages/Index';
-import PageRenderer from './pages/PageRenderer';
+import {
+	initializeMainPageRenderer,
+	mainPageRenderer,
+	PageRenderer,
+} from './pages/PageRenderer';
 
 const appContainer = document.querySelector('#appContainer'),
 	apiUrl = getApiUrl(window.location);
@@ -32,9 +36,10 @@ fetch(apiUrl + '/api/v1/helloworld')
 
 const menu = new Menu();
 const index = new Index();
-const pageRenderer = new PageRenderer(menu, '#appContainer');
 
-pageRenderer.setMenu(menu);
-menu.setEvents(pageRenderer);
+mainPageRenderer.setTarget('#appContainer');
+mainPageRenderer.setMenu(menu);
 
-pageRenderer.setPage(index);
+menu.setEvents();
+
+mainPageRenderer.setPage(index);
