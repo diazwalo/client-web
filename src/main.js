@@ -1,11 +1,9 @@
 import getApiUrl from './utils/url';
-import Menu from './Menu';
+import Menu from './rendering/Menu';
+import MenuButton from './rendering/MenuButton';
 import Index from './pages/Index';
-import {
-	initializeMainPageRenderer,
-	mainPageRenderer,
-	PageRenderer,
-} from './pages/PageRenderer';
+import { mainPageRenderer } from './pages/PageRenderer';
+import { isUserConnected } from './utils/cookies';
 
 const appContainer = document.querySelector('#appContainer'),
 	apiUrl = getApiUrl(window.location);

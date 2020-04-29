@@ -6,16 +6,15 @@ function getCookies() {
 }
 
 function isUserConnected() {
+	let result = false;
 	getCookies().forEach(c => {
-		console.warn(c);
 		if (c.startsWith('uuid=')) {
-			console.log('logged');
 			if (c.includes('uuid=disconnected') === false) {
-				return true;
+				result = true;
 			}
 		}
 	});
-	return false;
+	return result;
 }
 
 export { getCookies, isUserConnected };
