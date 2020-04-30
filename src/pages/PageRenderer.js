@@ -29,6 +29,7 @@ class PageRenderer {
 		if (this.#page instanceof Index) {
 			content = this.#page.render();
 			this.switchActive('#indexMenuButton');
+			postRenderOperation = this.#page.setEvents;
 		} else if (this.#page instanceof Connection) {
 			content = this.#page.render();
 			postRenderOperation = () => {
