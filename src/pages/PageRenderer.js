@@ -20,7 +20,7 @@ class PageRenderer {
 
 	/**
 	 * Set une nouvelle page, l'affiche et effectue une action post-rendu de la page
-	 * @param {Index | Connection} page
+	 * @param {Index | Connection | Inscription | UserPanel} page
 	 */
 	setPage(page) {
 		this.#page = page;
@@ -47,6 +47,8 @@ class PageRenderer {
 			content = this.#page.render();
 			this.switchActive('#userPanelMenuButton');
 			postRenderOperation = () => {
+				this.#page.initializePageRenderer();
+				this.#page.setEvents();
 				console.warn(
 					"TODO: Initialiser la sous page d'accueil de l'espace membre"
 				);
