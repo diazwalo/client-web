@@ -63,6 +63,9 @@ export default class Inscription extends Component {
 		);
 	}
 
+	/**
+	 * Initialise les événements des components de cette page
+	 */
 	setEvents() {
 		const passwordInput = document.querySelector('#password'),
 			passwordConfirm = document.querySelector('#confirmPassword'),
@@ -77,6 +80,10 @@ export default class Inscription extends Component {
 				emailInput.value.length > 0 &&
 				emailInput.value.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)
 			) {
+				/*
+					Envoit du formulaire au serveur et traitement de sa réponse.
+					Redirection sur l'accueil si succès, affichage d'une erreur si échec
+				*/
 				fetch(
 					getApiUrl(window.location) +
 						`/api/v1/register/${usernameInput.value}/${passwordInput.value}/${emailInput.value}`
@@ -97,12 +104,10 @@ export default class Inscription extends Component {
 						}
 					})
 					.catch(error => {
-						this.#errorMessageBox.setColor('red');
 						this.#errorMessageBox.setText(error);
 						this.#errorMessageBox.display();
 					});
 			} else {
-				this.#errorMessageBox.setColor('red');
 				this.#errorMessageBox.setText('Les données fournies sont incorrectes.');
 				this.#errorMessageBox.display();
 			}

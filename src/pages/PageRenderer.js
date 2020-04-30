@@ -1,6 +1,7 @@
 import Index from './Index';
 import Connection from './Connection';
 import Inscription from './Inscription';
+import UserPanel from './panel/UserPanel';
 
 class PageRenderer {
 	#target; // string
@@ -19,7 +20,7 @@ class PageRenderer {
 
 	/**
 	 * Set une nouvelle page, l'affiche et effectue une action post-rendu de la page
-	 * @param {Index | Connection} page
+	 * @param {Index | Connection | Inscription | UserPanel} page
 	 */
 	setPage(page) {
 		this.#page = page;
@@ -29,6 +30,7 @@ class PageRenderer {
 		if (this.#page instanceof Index) {
 			content = this.#page.render();
 			this.switchActive('#indexMenuButton');
+			postRenderOperation = this.#page.setEvents;
 		} else if (this.#page instanceof Connection) {
 			content = this.#page.render();
 			postRenderOperation = () => {
@@ -41,9 +43,18 @@ class PageRenderer {
 			postRenderOperation = () => {
 				this.#page.setEvents();
 			};
+		} else if (this.#page instanceof UserPanel) {
+			content = this.#page.render();
+			this.switchActive('#userPanelMenuButton');
+			postRenderOperation = () => {
+				this.#page.setEvents();
+				this.#page.switchActive('userIndexPageButton');
+				console.warn('Trigger?');
+			};
 		}
 
 		document.querySelector(this.#target).innerHTML = content;
+		console.warn(this.#target);
 		postRenderOperation();
 	}
 
@@ -80,6 +91,7 @@ class PageRenderer {
 		this.unsetActive('#connectMenuButton');
 		this.unsetActive('#disconnectMenuButton');
 		this.unsetActive('#registerMenuButton');
+		this.unsetActive('#userPanelMenuButton');
 		this.setActive(target);
 	}
 
