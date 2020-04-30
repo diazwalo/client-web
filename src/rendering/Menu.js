@@ -5,6 +5,7 @@ import { isUserConnected } from '../utils/cookies';
 import { mainPageRenderer } from '../pages/PageRenderer';
 import MenuButton from './MenuButton';
 import Inscription from '../pages/Inscription';
+import UserPanel from '../pages/panel/UserPanel';
 
 const nonConnectedMenu = [
 	new MenuButton('indexMenuButton', 'Accueil'),
@@ -15,6 +16,7 @@ const nonConnectedMenu = [
 // Menu of a connected user
 const connectedMenu = [
 	new MenuButton('indexMenuButton', 'Accueil'),
+	new MenuButton('userPanelMenuButton', 'Espace Membre'),
 	new MenuButton('disconnectMenuButton', 'Déconnexion'),
 ];
 
@@ -79,7 +81,8 @@ export default class Menu extends Component {
 		// Bouton de connexion et déconnexion
 		const connectButton = document.querySelector('#connectMenuButton'),
 			disconnectButton = document.querySelector('#disconnectMenuButton'),
-			registerMenuButton = document.querySelector('#registerMenuButton');
+			registerMenuButton = document.querySelector('#registerMenuButton'),
+			userPanelMenuButton = document.querySelector('#userPanelMenuButton');
 
 		if (connectButton)
 			connectButton.onclick = e => {
@@ -92,6 +95,11 @@ export default class Menu extends Component {
 				mainPageRenderer.setMenu(new Menu());
 				mainPageRenderer.setPage(new Index());
 				mainPageRenderer.switchActive('#indexMenuButton');
+			};
+
+		if (userPanelMenuButton)
+			userPanelMenuButton.onclick = e => {
+				mainPageRenderer.setPage(new UserPanel());
 			};
 
 		if (registerMenuButton)

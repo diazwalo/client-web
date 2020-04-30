@@ -1,6 +1,7 @@
 import Index from './Index';
 import Connection from './Connection';
 import Inscription from './Inscription';
+import UserPanel from './panel/UserPanel';
 
 class PageRenderer {
 	#target; // string
@@ -42,6 +43,14 @@ class PageRenderer {
 			postRenderOperation = () => {
 				this.#page.setEvents();
 			};
+		} else if (this.#page instanceof UserPanel) {
+			content = this.#page.render();
+			this.switchActive('#userPanelMenuButton');
+			postRenderOperation = () => {
+				console.warn(
+					"TODO: Initialiser la sous page d'accueil de l'espace membre"
+				);
+			};
 		}
 
 		document.querySelector(this.#target).innerHTML = content;
@@ -81,6 +90,7 @@ class PageRenderer {
 		this.unsetActive('#connectMenuButton');
 		this.unsetActive('#disconnectMenuButton');
 		this.unsetActive('#registerMenuButton');
+		this.unsetActive('#userPanelMenuButton');
 		this.setActive(target);
 	}
 
