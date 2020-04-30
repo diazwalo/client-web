@@ -1,68 +1,48 @@
 import Component from '../rendering/Component';
 import getApiUrl from '../utils/url';
+import { isUserConnected } from '../utils/cookies';
+import Button from '../rendering/Button';
+import Label from '../rendering/Label';
+import Input from '../rendering/Input';
+import MessageBox from '../rendering/MessageBox';
 
 /**
  * Page de connexion de l'application
  */
 export default class Connection extends Component {
+	#errorMessageBox;
+	#infoMessageBox;
+
 	constructor() {
 		super('div', {
 			class: 'flex flex-col flex-wrap items-center align-middle w-full h-full',
 		});
-		const errorComponent = new Component(
-			'p',
-			[{ class: 'text-red-500 p-2 text-thin' }, { id: 'errorMessage' }],
-			''
+		this.#errorMessageBox = new MessageBox(
+			'',
+			'red',
+			'errorMessageText',
+			'errorMessageBox'
+		);
+		this.#infoMessageBox = new MessageBox(
+			'',
+			'blue',
+			'infoMessageText',
+			'infoMessageBox'
 		);
 		const newContent = [
-			new Component(
-				'div',
-				[
-					{ class: 'hidden border border-red-800 bg-red-100 text-center mb-2' },
-					{ id: 'errorBox' },
-				],
-				errorComponent
-			),
+			this.#errorMessageBox,
+			this.#infoMessageBox,
 			new Component(
 				'h2',
 				{ class: 'text-teal-500 mb-6 text-xl text-center' },
 				'Connexion'
 			),
 			new Component('div', { class: 'flex flex-col flex-wrap' }, [
-				new Component(
-					'label',
-					[{ for: 'username' }, { class: 'mb-2 text-gray-700' }],
-					"Nom d'utilisateur"
-				),
-				new Component('input', [
-					{ name: 'username' },
-					{ id: 'username' },
-					{ type: 'text' },
-					{ class: 'border border-teal-500 p-1 mb-4' },
-				]),
-				new Component(
-					'label',
-					[{ for: 'password' }, { class: 'mb-2 text-gray-700' }],
-					'Mot de passe'
-				),
-				new Component('input', [
-					{ name: 'password' },
-					{ id: 'password' },
-					{ type: 'password' },
-					{ class: 'border border-teal-500 p-1 mb-4' },
-				]),
-				//new Breakline(),
-				new Component(
-					'button',
-					[
-						{ id: 'startConnectButton' },
-						{
-							class:
-								'border border-teal-500 bg-teal-400 p-2 text-white cursor-pointer hover:bg-gray-200 hover:text-teal-500',
-						},
-					],
-					'Se connecter'
-				),
+				new Label('username', "Nom d'utilisateur"),
+				new Input('username', 'username', 'text'),
+				new Label('password', 'Mot de passe'),
+				new Input('password', 'password', 'password'),
+				new Button('Se connecter', 'startConnectButton'),
 			]),
 		];
 		this.setContent(
@@ -78,10 +58,13 @@ export default class Connection extends Component {
 	 * Définition des événements du composant de connexion
 	 */
 	setEvents() {
-		const sendDatas = () => {
+		const sendDatasToConnectionServer = () => {
 			const username = document.getElementById('username').value;
 			const password = document.getElementById('password').value;
 
+			/*
+				Envoit du formulaire de connexion au serveur
+			*/
 			fetch(
 				getApiUrl(window.location) +
 					'/api/v1/authent/' +
@@ -92,10 +75,8 @@ export default class Connection extends Component {
 				.then(response => response.json())
 				.then(data => {
 					if (!data.authent) {
-						console.log(data);
 						this.showError('Mot de passe ou utilisateur incorrect.');
 					} else {
-						console.log(data);
 						document.cookie = 'uuid=' + data.uuid;
 						window.location.href = '/';
 					}
@@ -103,7 +84,13 @@ export default class Connection extends Component {
 				.catch(error => this.showError('Connexion impossible.<br>' + error));
 		};
 
-		document.querySelector('#startConnectButton').onclick = () => sendDatas();
+		document.querySelector('#startConnectButton').onclick = () => {
+			if (!isUserConnected()) {
+				sendDatasToConnectionServer();
+			} else {
+				this.showError('Vous êtes déjà connecté.');
+			}
+		};
 	}
 
 	/**
@@ -111,7 +98,18 @@ export default class Connection extends Component {
 	 * @param {string} message
 	 */
 	showError(message) {
-		document.querySelector('#errorMessage').innerHTML = message;
-		document.querySelector('#errorBox').classList.remove('hidden');
+		this.#errorMessageBox.setText(message);
+		this.#errorMessageBox.display();
+		this.#infoMessageBox.hide();
+	}
+
+	/**
+	 * Affiche une information à l'utilisateur
+	 * @param {string} message
+	 */
+	showInfo(message) {
+		this.#errorMessageBox.hide();
+		this.#infoMessageBox.setText(message);
+		this.#infoMessageBox.display();
 	}
 }
