@@ -47,15 +47,14 @@ class PageRenderer {
 			content = this.#page.render();
 			this.switchActive('#userPanelMenuButton');
 			postRenderOperation = () => {
-				this.#page.initializePageRenderer();
 				this.#page.setEvents();
-				console.warn(
-					"TODO: Initialiser la sous page d'accueil de l'espace membre"
-				);
+				this.#page.switchActive('userIndexPageButton');
+				console.warn('Trigger?');
 			};
 		}
 
 		document.querySelector(this.#target).innerHTML = content;
+		console.warn(this.#target);
 		postRenderOperation();
 	}
 

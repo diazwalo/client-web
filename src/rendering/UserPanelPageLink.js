@@ -12,7 +12,7 @@ export default class UserPanelPageLink extends Component {
 			[
 				{
 					class:
-						'text-gray-500 hover:text-blue-300 text-lg cursor-pointer text-center mb-4',
+						'text-gray-500 hover:text-blue-300 text-lg cursor-pointer text-center mb-4 p-2',
 				},
 				{ id: id },
 			],
