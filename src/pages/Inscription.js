@@ -58,6 +58,9 @@ export default class Inscription extends Component {
 		);
 	}
 
+	/**
+	 * Initialise les événements des components de cette page
+	 */
 	setEvents() {
 		const passwordInput = document.querySelector('#password'),
 			passwordConfirm = document.querySelector('#confirmPassword'),

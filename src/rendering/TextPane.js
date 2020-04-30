@@ -1,6 +1,11 @@
 import Component from './Component';
 
 export default class TextPane extends Component {
+	/**
+	 * Constructeur
+	 * @param {string} title
+	 * @param {string} text
+	 */
 	constructor(title, text) {
 		super(
 			'div',
